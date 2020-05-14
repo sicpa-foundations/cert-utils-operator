@@ -10,7 +10,7 @@ import (
 	"github.com/redhat-cop/cert-utils-operator/pkg/controller/util"
 	outils "github.com/redhat-cop/operator-utils/pkg/util"
 	corev1 "k8s.io/api/core/v1"
-	crd "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	crd "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -217,8 +217,8 @@ func (r *ReconcileCRD) Reconcile(request reconcile.Request) (reconcile.Result, e
 
 	//we update only if the fields are initialized
 	if instance.Spec.Conversion != nil {
-		if instance.Spec.Conversion.Webhook != nil {
-			instance.Spec.Conversion.Webhook.ClientConfig.CABundle = caBundle
+		if instance.Spec.Conversion.WebhookClientConfig != nil {
+			instance.Spec.Conversion.WebhookClientConfig.CABundle = caBundle
 			err = r.GetClient().Update(context.TODO(), instance)
 		}
 	}

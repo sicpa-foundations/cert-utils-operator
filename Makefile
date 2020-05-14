@@ -32,7 +32,7 @@ native-test: generate fmt vet
 
 # Build manager binary
 manager: generate fmt vet
-	go build -o build/_output/bin/cert-utils-operator  -ldflags $(LDFLAGS) github.com/redhat-cop/cert-utils-operator/cmd/manager
+	GOOS=linux go build -o build/_output/bin/cert-utils-operator  -ldflags $(LDFLAGS) github.com/redhat-cop/cert-utils-operator/cmd/manager
 
 # Build manager binary
 manager-osx: generate fmt vet
